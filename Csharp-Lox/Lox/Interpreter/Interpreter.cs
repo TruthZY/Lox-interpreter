@@ -151,6 +151,13 @@ namespace Lox
          object Expr.IVisitor<object>.Visit(Expr.Get _get)
         {
             object target = Evaluate(_get.target);
+
+            // 支持 LoxNativeObject
+            if (target is LoxNativeObject nativeObj)
+            {
+                return nativeObj.Get(_get.name);
+            }
+
             if (target is LoxInstance)
             {
                 return ((LoxInstance)target).Get(_get.name);
@@ -187,6 +194,14 @@ namespace Lox
          object Expr.IVisitor<object>.Visit(Expr.Set _set)
         {
             object target = Evaluate(_set.target);
+
+            // 支持 LoxNativeObject
+            if (target is LoxNativeObject nativeObj)
+            {
+                object value = Evaluate(_set.value);
+                nativeObj.Set(_set.name, value);
+                return value;
+            }
 
             if (!(target is LoxInstance))
             {

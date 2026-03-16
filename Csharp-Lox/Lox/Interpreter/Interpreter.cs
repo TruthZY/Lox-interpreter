@@ -22,6 +22,13 @@ namespace Lox
         {
             Globals.Define("clock", new NativeFunctions.Clock());
             Globals.Define("exit", new NativeFunctions.Exit());
+
+            // 注册 .NET 原生对象
+            Globals.Define("math", new LoxNativeObject(new LoxMath()));
+            Globals.Define("str", new LoxNativeObject(new LoxString()));
+            Globals.Define("list", new LoxNativeObject(new LoxList()));
+            Globals.Define("file", new LoxNativeObject(new LoxFile()));
+            Globals.Define("random", new LoxNativeObject(new LoxRandom()));
         }
 
 
@@ -208,10 +215,10 @@ namespace Lox
                 throw new RuntimeError(_set.name, "Only instances have fields.");
             }
 
-            object value = Evaluate(_set.value);
-            ((LoxInstance)target).Set(_set.name, value);
+            object instanceValue = Evaluate(_set.value);
+            ((LoxInstance)target).Set(_set.name, instanceValue);
 
-            return value;
+            return instanceValue;
         }
 
          object Expr.IVisitor<object>.Visit(Expr.Super _super)

@@ -6,7 +6,7 @@ namespace Lox
     /// <summary>
     /// 用于将 .NET 对象注册到 Lox 环境的工具类
     /// </summary>
-    public static class NativeObjectRegistry
+    internal static class NativeObjectRegistry
     {
         /// <summary>
         /// 将 .NET 对象注册到 Lox 全局环境

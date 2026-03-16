@@ -1,0 +1,25 @@
+// 测试 Lox 代码
+print "=== Math Demo ===";
+print math.pi;
+print math.sqrt(16);
+print math.pow(2, 10);
+
+print "";
+print "=== String Demo ===";
+var s = "hello world";
+print str.toUpper(s);
+print str.length(s);
+print str.substring(s, 0, 5);
+
+print "";
+print "=== List Demo ===";
+var arr = list.create();
+list.add(arr, "first");
+list.add(arr, "second");
+print list.count(arr);
+print list.get(arr, 0);
+
+print "";
+print "=== Random Demo ===";
+print random.next();
+print random.range(1, 100);
